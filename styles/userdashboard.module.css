@@ -1,0 +1,65 @@
+/* Assuming you are using Tailwind CSS */
+
+.user-dashboard-container {
+    width: 100%;
+    max-width: 65ch;
+    font-size: 0.875rem; /* Equivalent to text-sm */
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem; /* Equivalent to sm:gap-5 */
+}
+
+.user_dashboard_input_container {
+    display: flex;
+    align-items: stretch;
+}
+
+.user_dashboard_input {
+    outline: none;
+    padding: 0.75rem;
+    font-size: 1rem; /* Equivalent to text-base */
+    flex: 1;
+}
+
+.user_dashboard_add_button {
+    width: fit-content;
+    padding: 0.5rem 1rem;
+    background-color: #ffc107; /* Equivalent to bg-amber-400 */
+    color: #ffffff; /* Equivalent to text-white */
+    font-weight: 500;
+    font-size: 1rem; /* Equivalent to text-base */
+    transition: opacity 0.3s;
+    cursor: pointer;
+}
+
+.user_dashboard_spinner {
+    flex: 1;
+    display: grid;
+    place-items: center;
+}
+
+.todo_card {
+    font-family: 'Font Awesome 5 Free'; /* Add your Font Awesome library reference */
+    font-weight: 900; /* This may vary depending on your Font Awesome version */
+    animation: spin 1s linear infinite;
+    font-size: 4rem; /* Adjust the font size as needed */
+ }
+ @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.user-dashboard-add-todo-button {
+    text-align: center;
+    color: #87c0cd; /* Equivalent to text-cyan-300 */
+    border: 1px solid #87c0cd; /* Equivalent to border and border-solid properties */
+    padding: 0.5rem 0;
+    font-size: 1.125rem; /* Equivalent to text-lg */
+    transition: opacity 0.3s;
+    cursor: pointer;
+}
+
+.user-dashboard-add-todo-button:hover {
+    opacity: 0.7; /* Equivalent to hover:opacity-30 */
+}

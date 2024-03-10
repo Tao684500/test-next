@@ -1,0 +1,21 @@
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.25rem; 
+    padding-top: 0.75rem; 
+  }
+  
+  .footer a i, 
+  .footer i {
+    font-size: 1.5rem; 
+    transition: opacity 0.3s; 
+    cursor: pointer;
+    transition-duration: 300ms;
+  }
+  
+  .footer i:hover {
+    opacity: 0.3;
+    transition-duration: 300ms;
+  }
+  

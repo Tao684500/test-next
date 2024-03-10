@@ -1,0 +1,50 @@
+/* CSS */
+.todo_card {
+    padding: 2px;
+    position: relative;
+    border: 1px solid white;
+    display: flex;
+    align-items: stretch;
+  }
+  
+  .todo_card_inner {
+    flex: 1;
+    display: flex;
+  }
+  
+  .todo_content {
+    background: inherit;
+    flex: 1;
+    color: white;
+    outline: none;
+  }
+  
+  .todo_edit_input {
+    background: inherit;
+    flex: 1;
+    color: white;
+    outline: none;
+  }
+  
+  .todo_actions {
+    display: flex;
+    align-items: center;
+  }
+  
+  .edit_icon,
+  .check_icon,
+  .delete_icon {
+    padding: 0 10px;
+    transition: transform 0.3s;
+    cursor: pointer;
+  }
+  
+  .edit_icon:hover {
+    transform: rotate(45deg);
+  }
+  
+  .check_icon:hover,
+  .delete_icon:hover {
+    transform: scale(1.25);
+  }
+  
