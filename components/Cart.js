@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../styles/cart_item.module.css";
+import DeleteConfirmationModal from "./DeleteConfirmationModal";
 
 const CartItem = ({ item, handleQuantityChange, handleRemoveFromCart }) => {
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+
+  const toggleDeleteConfirmation = () => {
+    setShowDeleteConfirmation(!showDeleteConfirmation);
+  };
+
+  const handleConfirmRemove = () => {
+    handleRemoveFromCart(item.id);
+    toggleDeleteConfirmation();
+  };
+
   const calculateItemPrice = (item) => {
     return item.price * item.quantity;
   };
@@ -9,22 +21,33 @@ const CartItem = ({ item, handleQuantityChange, handleRemoveFromCart }) => {
   return (
     <div>
       <div key={item.id} className={styles.cart_item}>
-        <img src={item.image} alt={item.title} />
+        <img src={item.image} alt={item.title} className={styles.image} />
         <div className={styles.cart_item_info}>
-          <h3>{item.title}</h3>
-          <p>Price: {item.price}</p>
+          <div className={styles.title}>{item.title}</div>
+          <p className={styles.price}>${item.price}</p>
           <div>
             <input
               type="number"
               min="1"
               value={item.quantity}
               onChange={(e) => handleQuantityChange(item.id, e.target.value)}
+              className={styles.input}
             />
           </div>
-          <p>Total Price: ${calculateItemPrice(item)}</p>
-          <button onClick={() => handleRemoveFromCart(item.id)}>Remove</button>
+          <p className={styles.price}>${calculateItemPrice(item)}</p>
+          <div>
+            <button className={styles.remove} onClick={toggleDeleteConfirmation}>
+              Remove
+            </button>
+          </div>
         </div>
       </div>
+      {showDeleteConfirmation && (
+        <DeleteConfirmationModal
+          handleConfirmRemove={handleConfirmRemove}
+          toggleDeleteConfirmation={toggleDeleteConfirmation}
+        />
+      )}
     </div>
   );
 };
@@ -34,23 +57,29 @@ const Cart = ({
   handleQuantityChange,
   handleRemoveFromCart,
   totalPrice,
+  closeModal,
 }) => {
   return (
     <div className={styles.cart_container}>
-      <div>
-        <i class="fa-solid fa-basket-shopping"></i>
-        <div>My Cart</div>
+      <div className={styles.text_detail}>
+        <i className={`fa-solid fa-basket-shopping ${styles.icon_h}`}></i>
+        <div className={`${styles.text_h}`}>ตะกร้าของฉัน</div>
       </div>
-      {cart.map((item) => (
-        <CartItem
-          key={item.id}
-          item={item}
-          handleQuantityChange={handleQuantityChange}
-          handleRemoveFromCart={handleRemoveFromCart}
-        />
-      ))}
-      <div>Total Price: ${totalPrice}</div>{" "}
-      {/* แสดงค่า Total Price ที่ได้รับมา */}
+      <div className={styles.detail}>
+        {cart.map((item) => (
+          <CartItem
+            key={item.id}
+            item={item}
+            handleQuantityChange={handleQuantityChange}
+            handleRemoveFromCart={handleRemoveFromCart}
+          />
+        ))}
+      </div>
+      <div className={`${styles.cart_item} ${styles.detail_total}`}>
+        <div className={`${styles.price} `}>รวมทั้งหมด</div>
+        <div className={styles.price}>${totalPrice}</div>{" "}
+      </div>
+      <button onClick={closeModal} className={styles.closeButton}>ปิด</button>
     </div>
   );
 };

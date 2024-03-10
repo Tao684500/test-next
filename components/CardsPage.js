@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import styles from '../styles/cards.module.css'; 
-import Cart from './Cart'
+import styles from '../styles/cards.module.css';
+import Cart from './Cart';
 
 const CardsPage = () => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(6);
   const [cart, setCart] = useState([]);
+  const [showCartModal, setShowCartModal] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,6 +25,11 @@ const CardsPage = () => {
   const handleAddToCart = (productId) => {
     const itemToAdd = data.find(item => item.id === productId);
     setCart([...cart, { ...itemToAdd, quantity: 1 }]);
+    setShowCartModal(true);
+  };
+
+  const closeModal = () => {
+    setShowCartModal(false);
   };
 
   const handleIncreaseQuantity = (productId) => {
@@ -88,7 +94,7 @@ const CardsPage = () => {
             <img src={item.image} alt={item.title} className={styles.product_image} />
             <h2>{item.title}</h2>
             <p>{item.price}</p>
-            <button onClick={() => handleAddToCart(item.id)}>Add to Cart</button>
+            <button onClick={() => { handleAddToCart(item.id); setShowCartModal(true); }}>Add to Cart</button>
           </div>
         ))}
       </div>
@@ -103,14 +109,22 @@ const CardsPage = () => {
         <button onClick={handleNextPage} disabled={currentPage === totalPages}>Next</button>
         <button onClick={() => handlePagination(totalPages)}>Last</button>
       </div>
-      <Cart
-        cart={cart}
-        handleDecreaseQuantity={handleDecreaseQuantity}
-        handleIncreaseQuantity={handleIncreaseQuantity}
-        handleRemoveFromCart={handleRemoveFromCart}
-        handleQuantityChange={handleQuantityChange}
-        totalPrice={calculateTotalPrice()}
-      />
+      {showCartModal && (
+        <div className={styles.modal}>
+          <div className={styles.modal_content}>
+            <span className={styles.close} onClick={closeModal}>&times;</span>
+            <Cart
+              cart={cart}
+              handleDecreaseQuantity={handleDecreaseQuantity}
+              handleIncreaseQuantity={handleIncreaseQuantity}
+              handleRemoveFromCart={handleRemoveFromCart}
+              handleQuantityChange={handleQuantityChange}
+              totalPrice={calculateTotalPrice()}
+              closeModal={closeModal}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
