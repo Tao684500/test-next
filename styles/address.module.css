@@ -1,0 +1,56 @@
+.address {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.address_form {
+    display: flex;
+    flex-direction: column;
+    background: gainsboro;
+    align-items: center;
+    border-radius: 5px;
+    align-items: flex-start;
+}
+
+.label {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 5px 20px;
+    color: #000;
+}
+
+.input {
+    width: 400px;
+    height: 25px;
+
+}
+
+.button {
+    padding-left: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.select {
+    width: 408px;
+    height: 31px;
+}
+
+.save {
+    padding: 5px 30px;
+    background: green;
+    color: #fff;
+    margin-right: 10px;
+    border: none;
+}
+
+.cancel {
+    padding: 5px 30px;
+    background: #fff;
+    color: #000;
+    margin-right: 10px;
+    border: green;
+}

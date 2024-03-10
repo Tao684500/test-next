@@ -4,6 +4,8 @@ import { Inter } from '@next/font/google'
 import { Login } from '../components/Login'
 import { useAuth } from '../context/AuthContext'
 import { UserDashboard } from '../components/UserDashboard'
+import CardsPage from '../components/CardsPage'
+// import AddressForm from '../components/Address'
 // import styles from '../styles/Home.module.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -21,7 +23,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {!currentUser && <Login />}
-      {currentUser && <UserDashboard/>}
+      {currentUser && <CardsPage/>}
     </>
   )
 }

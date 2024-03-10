@@ -19,7 +19,6 @@ export default function useFetchTodos() {
                 if (docSnap.exists()) {
                     console.log(docSnap.data());
                     setTodos(docSnap.data().todos)
-                    // setTodos('todos' in docSnap.data() ? docSnap.data().todos : {})
                 } 
             } catch (err) {
                 setError('Failed to load todos')
