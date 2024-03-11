@@ -87,7 +87,7 @@ const CardsPage = () => {
 
   return (
     <div className={styles.container}>
-      <h1>API Cards</h1>
+      <div className={styles.txt}>API Cards</div>
       <div className={styles.cards_container}>
         {currentItems.map(item => (
           <div key={item.id} className={styles.card}>
