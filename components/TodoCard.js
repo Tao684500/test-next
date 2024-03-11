@@ -13,7 +13,6 @@ export const TodoCard = (props) => {
     handleEditTodo,
     handleDelete,
   } = props;
-//   console.log(handleAddEdit(t));
   return (
     <div className={`${styles.todo_card}`}>
       <div className={`${styles.todo_card_inner}`}>
@@ -26,7 +25,6 @@ export const TodoCard = (props) => {
             onChange={(e) => setEdittedValue(e.target.value)}
           />
         )}
-        {/* {children} */}
       </div>
       <div className={`${styles.todo_actions}`}>
         {edit === todoKey ? (
