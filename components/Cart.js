@@ -74,13 +74,12 @@ const Cart = ({
       toast("Redirecting to login page...");
       setTimeout(() => {
         router.push("/login");
-      }, 5000); // 5 seconds
+      }, 5000); 
     } else {
       toast("Redirecting to the address input page...");
       setTimeout(() => {
-        router.push("/Address");
-      }, 5000); // 5 seconds
-
+        router.push("/address");
+      }, 5000); 
      
     }
   };
