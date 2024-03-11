@@ -1,17 +1,45 @@
+// Header.js
+
 import React, { useState } from "react";
-import styles from "../styles/header.module.css"
-import { Modal } from "./Modal";
+import styles from "../styles/header.module.css";
+import { useAuth } from '../context/AuthContext';
+import { useRouter } from 'next/router'; 
 
 export const Header = () => {
-  const [openModal, setOpenModal] = useState(false)
+  const { currentUser, logout } = useAuth();
+  const router = useRouter();
+  const [dropdownOpen, setDropdownOpen] = useState(false); 
+
+  const handleLogoutClick = () => {
+    if (currentUser) {
+      logout(); 
+      router.push('/'); 
+    }
+  };
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
 
   return (
-    <>
-     {openModal && <Modal setOpenModal={setOpenModal} />}
-      <div className={`${styles.header}`}>
-        <h1 className="">TODO LIST</h1>
-        <i onClick={() => setOpenModal(true)} className="fa-solid fa-user"></i>
+    <div className={styles.header}>
+      <h1 className="">TODO LIST</h1>
+      <div className={styles.dropdown}>
+        <i className={`fa-solid fa-user ${styles.icon} ${dropdownOpen ? styles.active : ''}`} onClick={toggleDropdown}></i>
+        <div className={`${styles.dropdownContent} ${dropdownOpen ? styles.show : ''}`}>
+          {currentUser ? (
+            <div>
+              <div>สวัสดีครับ</div>
+              <button onClick={handleLogoutClick}>Logout</button>
+            </div>
+          ) : (
+            <div>
+              <div>กรุณาล็อกอิน</div>
+              <button onClick={() => router.push('/login')}>Login</button>
+            </div>
+          )}
+        </div>
       </div>
-    </>
+    </div>
   );
 };
