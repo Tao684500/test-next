@@ -1,4 +1,3 @@
-/* CSS */
 .todo_card {
     padding: 2px;
     position: relative;
@@ -10,6 +9,8 @@
   .todo_card_inner {
     flex: 1;
     display: flex;
+    padding: 10px 20px;
+    font-size: 18px;
   }
   
   .todo_content {
