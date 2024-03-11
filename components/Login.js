@@ -25,10 +25,14 @@ export const Login = () => {
       }
       return;
     }
-    await signup(email, password);
+    try {
+      await signup(email, password);
+      alert("Signup successful!"); // แจ้งเตือนเมื่อสมัครสมาชิกสำเร็จ
+    } catch (err) {
+      setError("Failed to create an account");
+    }
   }
-
-  
+   
 
   return (
     <div className={`${styles.login}`}>
