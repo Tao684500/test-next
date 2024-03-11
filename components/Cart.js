@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styles from "../styles/cart_item.module.css";
 import DeleteConfirmationModal from "./DeleteConfirmationModal";
+import { useAuth } from '../context/AuthContext'
+import { useRouter } from 'next/router'; // เพิ่ม import
 
 const CartItem = ({ item, handleQuantityChange, handleRemoveFromCart }) => {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
@@ -36,7 +38,7 @@ const CartItem = ({ item, handleQuantityChange, handleRemoveFromCart }) => {
           </div>
           <p className={styles.price}>${calculateItemPrice(item)}</p>
           <div>
-            <button className={styles.remove} onClick={toggleDeleteConfirmation}>
+            <button className={styles.closeButton} onClick={toggleDeleteConfirmation}>
               Remove
             </button>
           </div>
@@ -59,6 +61,21 @@ const Cart = ({
   totalPrice,
   closeModal,
 }) => {
+  const { currentUser } = useAuth();
+  const router = useRouter(); 
+
+  const handleCheckout = () => {
+    if (!currentUser) {
+     
+      alert("กรุณาล็อกอินเพื่อทำการสั่งซื้อสินค้า");
+      router.push('/login'); 
+    } else {
+      alert("กำลังเดินทางไปยังหน้ากรอกที่อยู่...");
+      router.push('/Address'); 
+    }
+  };
+  
+
   return (
     <div className={styles.cart_container}>
       <div className={styles.text_detail}>
@@ -78,7 +95,9 @@ const Cart = ({
       <div className={`${styles.cart_item} ${styles.detail_total}`}>
         <div className={`${styles.price} `}>รวมทั้งหมด</div>
         <div className={styles.price}>${totalPrice}</div>{" "}
+   
       </div>
+      <button onClick={handleCheckout} className={styles.checkoutButton}>Checkout</button>
       <button onClick={closeModal} className={styles.closeButton}>ปิด</button>
     </div>
   );
