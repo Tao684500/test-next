@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import styles from "../styles/cart_item.module.css";
 import DeleteConfirmationModal from "./DeleteConfirmationModal";
-import { useAuth } from '../context/AuthContext'
-import { useRouter } from 'next/router'; // เพิ่ม import
+import { useAuth } from "../context/AuthContext";
+import { useRouter } from "next/router"; 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CartItem = ({ item, handleQuantityChange, handleRemoveFromCart }) => {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
@@ -38,7 +40,10 @@ const CartItem = ({ item, handleQuantityChange, handleRemoveFromCart }) => {
           </div>
           <p className={styles.price}>${calculateItemPrice(item)}</p>
           <div>
-            <button className={styles.closeButton} onClick={toggleDeleteConfirmation}>
+            <button
+              className={styles.closeButton}
+              onClick={toggleDeleteConfirmation}
+            >
               Remove
             </button>
           </div>
@@ -62,19 +67,23 @@ const Cart = ({
   closeModal,
 }) => {
   const { currentUser } = useAuth();
-  const router = useRouter(); 
+  const router = useRouter();
 
   const handleCheckout = () => {
     if (!currentUser) {
-     
-      alert("กรุณาล็อกอินเพื่อทำการสั่งซื้อสินค้า");
-      router.push('/login'); 
+      toast("Redirecting to login page...");
+      setTimeout(() => {
+        router.push("/login");
+      }, 5000); // 5 seconds
     } else {
-      alert("กำลังเดินทางไปยังหน้ากรอกที่อยู่...");
-      router.push('/Address'); 
+      toast("Redirecting to the address input page...");
+      setTimeout(() => {
+        router.push("/Address");
+      }, 5000); // 5 seconds
+
+     
     }
   };
-  
 
   return (
     <div className={styles.cart_container}>
@@ -95,10 +104,16 @@ const Cart = ({
       <div className={`${styles.cart_item} ${styles.detail_total}`}>
         <div className={`${styles.price} `}>รวมทั้งหมด</div>
         <div className={styles.price}>${totalPrice}</div>{" "}
-   
       </div>
-      <button onClick={handleCheckout} className={styles.checkoutButton}>Checkout</button>
-      <button onClick={closeModal} className={styles.closeButton}>ปิด</button>
+      <button onClick={handleCheckout} className={styles.checkoutButton}>
+      Checkout
+      </button>
+      <button onClick={closeModal} className={styles.closeButton}>
+        Close
+      </button>
+      <div>
+        <ToastContainer />
+      </div>
     </div>
   );
 };
