@@ -5,7 +5,6 @@ import { TodoCard } from "./TodoCard";
 import { doc, setDoc, deleteField } from 'firebase/firestore';
 import { db } from '../firebase';
 import useFetchTodos from "../hooks/fetchTodos";
-import { Tao } from "./Tao";
 
 export const UserDashboard = () => {
   const {currentUser } = useAuth();
@@ -67,7 +66,6 @@ export const UserDashboard = () => {
 
   return (
     <>
-    <Tao/>
     <div className={`${styles.userdashboard}`}>
       <div className={`${styles.user_dashboard_input_container}`}>
         <input
