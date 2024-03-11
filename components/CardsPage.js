@@ -93,7 +93,7 @@ const CardsPage = () => {
           <div key={item.id} className={styles.card}>
             <img src={item.image} alt={item.title} className={styles.product_image} />
             <h2>{item.title}</h2>
-            <p>{item.price}</p>
+            <p>${item.price}</p>
             <button onClick={() => { handleAddToCart(item.id); setShowCartModal(true); }}>Add to Cart</button>
           </div>
         ))}
